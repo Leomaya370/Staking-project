@@ -1,4 +1,4 @@
-// 💡 Generador de dirección virtual tipo Tron (simulada)
+// 💡 Genera una dirección virtual Tron simulada
 function generarDireccionVirtual() {
   const letras = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
   const numeros = '123456789';
@@ -11,9 +11,9 @@ function generarDireccionVirtual() {
   return direccion;
 }
 
-// 📦 Variables globales para staking y acumulación
+// Variables globales de staking
 let perfilActivo = null;
-let base = 0; // total depositado por el usuario
+let base = 0;
 let apy = 0.30;
 let gainPerSec = 0;
 let start = Date.now();
@@ -21,10 +21,10 @@ let start = Date.now();
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form-perfil');
   const datosUsuario = document.getElementById('datos-usuario');
-  const reloj = document.getElementById('reloj');
   const direccionDeposito = document.getElementById('direccion-deposito');
+  const reloj = document.getElementById('reloj');
 
-  // 📝 Registro de nuevo usuario
+  // 📝 Registro nuevo perfil (index.html)
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -33,24 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!wallet || !pass) return;
 
-      let lista = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
 
       if (lista.find(u => u.wallet === wallet)) {
-        alert("Esta wallet ya está registrada.");
+        alert("⚠️ Esta wallet ya está registrada.");
         return;
       }
 
       const tema = 'claro';
-      const direccionDeposito = generarDireccionVirtual();
+      const direccion = generarDireccionVirtual();
 
-      lista.push({ wallet, pass, tema, direccionDeposito });
+      lista.push({ wallet, pass, tema, direccionDeposito: direccion });
       localStorage.setItem('usuarios', JSON.stringify(lista));
       localStorage.setItem('usuarioActivo', wallet);
       window.location.href = 'dashboard.html';
     });
   }
 
-  // 👤 Cargar perfil en dashboard
+  // 🧭 Dashboard: cargar datos del perfil activo
   const ruta = window.location.pathname;
   if (ruta.includes('dashboard')) {
     const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -59,12 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
     perfilActivo = perfil;
 
     if (!perfil) {
-      alert("Perfil no encontrado. Redirigiendo…");
+      alert("No se encontró un perfil activo. Redirigiendo...");
       window.location.href = 'index.html';
       return;
     }
 
     document.body.classList.add(`tema-${perfil.tema}`);
+
     if (datosUsuario) {
       datosUsuario.innerHTML = `
         <strong>Wallet:</strong> ${perfil.wallet}<br>
@@ -76,50 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
       direccionDeposito.innerText = perfil.direccionDeposito;
     }
 
-    // Iniciar staking con base inicial
     base = 0;
     actualizarGanancia();
     setInterval(actualizarGanancia, 1000);
   }
 });
 
-// ⏱️ Actualizar reloj de staking
+// ⏱ Simulación de staking
 function actualizarGanancia() {
-  if (!document.getElementById('reloj')) return;
+  const reloj = document.getElementById('reloj');
+  if (!reloj) return;
+
   const elapsed = (Date.now() - start) / 1000;
   gainPerSec = base * apy / (365 * 24 * 60 * 60);
   const total = base + gainPerSec * elapsed;
-  document.getElementById('reloj').innerText = `${total.toFixed(6)} TRX`;
+  reloj.innerText = `${total.toFixed(6)} TRX`;
 }
 
-// 📋 Copiar dirección
-function copiarDireccion() {
-  const direccion = document.getElementById('direccion-deposito').innerText;
-  navigator.clipboard.writeText(direccion).then(() => {
-    alert("✅ Dirección copiada al portapapeles.");
-  }).catch(() => {
-    alert("❌ Error al copiar.");
-  });
-}
-
-// 💸 Simular depósito (afecta al staking)
+// 📥 Simula un depósito y actualiza el staking
 function simularDeposito() {
   const input = document.getElementById('monto-deposito');
   const monto = parseFloat(input.value);
-  const depositosDiv = document.getElementById('depositos');
+  const div = document.getElementById('depositos');
+
   if (!isNaN(monto) && monto > 0) {
     base += monto;
-    start = Date.now(); // reinicia acumulador
+    start = Date.now();
+
     const p = document.createElement('p');
     p.textContent = `🟢 Depósito simulado: ${monto.toFixed(2)} TRX`;
-    depositosDiv.appendChild(p);
+    div.appendChild(p);
     input.value = '';
   } else {
     alert("❗ Ingresa un monto válido.");
   }
 }
 
-// 🚪 Simular retiro
+// 📤 Simula un retiro
 function realizarRetiro() {
   const monto = parseFloat(document.getElementById('monto-retiro').value);
   const retiros = document.getElementById('retiros');
@@ -128,4 +122,12 @@ function realizarRetiro() {
     p.textContent = `✅ Retiro simulado de ${monto.toFixed(2)} TRX`;
     retiros.appendChild(p);
   }
+}
 
+// 📋 Copiar dirección de depósito al portapapeles
+function copiarDireccion() {
+  const direccion = document.getElementById('direccion-deposito').innerText;
+  navigator.clipboard.writeText(direccion)
+    .then(() => alert("📎 Dirección copiada al portapapeles"))
+    .catch(() => alert("❌ No se pudo copiar"));
+}
