@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 2em;
+  background-color: #f4f4f8;
+  color: #333;
+}
+
+h1, h2 {
+  color: #0066cc;
+}
+
+form, section {
+  margin-top: 20px;
+  padding: 1em;
+  background: #fff;
+  border-radius: 8px;
+}
