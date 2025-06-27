@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mi Staking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>👤 Panel de Usuario</h2>
+  <div id="datos-usuario"></div>
+
+  <section>
+    <h3>💰 Depósitos</h3>
+    <div id="depositos">– Sin depósitos aún</div>
+  </section>
+
+  <section>
+    <h3>📤 Retiros</h3>
+    <input type="number" id="monto-retiro" placeholder="Monto TRX" />
+    <button onclick="realizarRetiro()">Retirar</button>
+    <div id="retiros"></div>
+  </section>
+
+  <section>
+    <h3>🕒 Reloj de Ganancias</h3>
+    <p id="reloj">0.000000 TRX</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
