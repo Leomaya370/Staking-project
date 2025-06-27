@@ -41,3 +41,10 @@ function realizarRetiro() {
     retiros.appendChild(p);
   }
 }
+// Por ejemplo, aplicar el tema guardado
+const perfil = JSON.parse(localStorage.getItem('usuario'));
+if (perfil && perfil.tema) {
+  document.body.classList.add(`tema-${perfil.tema}`);
+} else {
+  document.body.classList.add('tema-claro'); // por defecto
+}
