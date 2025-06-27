@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>StakingApp – Tu portal DeFi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🚀 Bienvenido a StakingApp</h1>
+  <p>Tu portal de staking descentralizado donde ganas TRX por holdear nuestro token 🔒</p>
+
+  <form id="form-perfil">
+    <label for="wallet">Dirección TRON:</label>
+    <input type="text" id="wallet" required />
+    
+    <label for="pass">Contraseña:</label>
+    <input type="password" id="pass" required />
+    
+    <button type="submit">Crear perfil</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
