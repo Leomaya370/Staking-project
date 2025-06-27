@@ -23,7 +23,20 @@
     <button onclick="realizarRetiro()">Retirar</button>
     <div id="retiros"></div>
   </section>
+<section class="card">
+  <h3>📥 Tu dirección de depósito</h3>
+  <code id="direccion-deposito"></code>
+  <br />
+  <button onclick="copiarDireccion()" style="margin-top: 0.5em;">📋 Copiar dirección</button>
 
+  <hr />
+
+  <label for="monto-deposito">💸 Simular un depósito:</label>
+  <input type="number" id="monto-deposito" placeholder="Monto TRX" />
+  <button onclick="simularDeposito()">📥 Depositar</button>
+
+  <div id="depositos" style="margin-top:1em;"></div>
+</section>
   <section>
     <h3>🕒 Reloj de Ganancias</h3>
     <p id="reloj">0.000000 TRX</p>
