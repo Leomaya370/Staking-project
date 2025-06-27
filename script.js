@@ -102,6 +102,11 @@ function simularDeposito() {
 
   if (!isNaN(monto) && monto > 0) {
     base += monto;
+    // Guardar el timestamp del primer depósito si no existe aún
+if (!perfilActivo.bloqueo) {
+  perfilActivo.bloqueo = Date.now();
+  guardarPerfil(perfilActivo);
+}
     start = Date.now();
 
     const p = document.createElement('p');
