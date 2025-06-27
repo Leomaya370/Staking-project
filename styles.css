@@ -15,3 +15,54 @@ form, section {
   background: #fff;
   border-radius: 8px;
 }
+/* Estilo base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 2rem;
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+/* 🎨 Tema claro */
+.tema-claro {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* 🌙 Tema oscuro */
+.tema-oscuro {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+/* 💫 Tema DeFi galaxia */
+.tema-defi-galaxia {
+  background: linear-gradient(135deg, #1e003e, #3e0060);
+  color: #fff4ff;
+}
+
+.card, section, form {
+  padding: 1rem;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.tema-claro .card,
+.tema-claro section,
+.tema-claro form {
+  background: #f9f9f9;
+}
+
+.tema-oscuro .card,
+.tema-oscuro section,
+.tema-oscuro form {
+  background: #1f1f1f;
+}
+
+.tema-defi-galaxia .card,
+.tema-defi-galaxia section,
+.tema-defi-galaxia form {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
