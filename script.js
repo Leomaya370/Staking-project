@@ -187,10 +187,6 @@ perfilActivo = perfil;
 }
 
 // Luego en el DOM:
-const direccion = document.getElementById('direccion-deposito');
-if (direccion) {
-  direccion.innerText = perfil.direccionDeposito;
-    }
 
     const direccion = document.getElementById('direccion-deposito');
     if (direccion) {
