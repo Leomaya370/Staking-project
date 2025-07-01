@@ -1,28 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Enlace al archivo de estilo de bóveda -->
-<link rel="stylesheet" href="vault.css">
-
-<!-- Fuentes holográficas -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
-  <title>StakingApp – Tu portal DeFi</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>🚀 Bienvenido a StakingApp</h1>
-  <p>Tu portal de staking descentralizado donde ganas TRX por holdear nuestro token 🔒</p>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StakingApp – TronHold Vault</title>
 
-  <form id="form-perfil">
-    <label for="wallet">Dirección TRON:</label>
-    <input type="text" id="wallet" required />
-    
-    <label for="pass">Contraseña:</label>
-    <input type="password" id="pass" required />
-    
-    <button type="submit">Crear perfil</button>
-  </form>
+  <!-- Estilo de bóveda -->
+  <link rel="stylesheet" href="vault.css" />
+  <!-- Fuentes futuristas -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🌐 Escáner visual descendente */
+    .scanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 255, 153, 0.1) 0%, rgba(0, 255, 153, 0.25) 50%, rgba(0, 255, 153, 0.1) 100%);
+      pointer-events: none;
+      animation: scan 3s ease-out 1;
+      z-index: 999;
+    }
+
+    @keyframes scan {
+      0% {
+        top: -100%;
+        opacity: 0.7;
+      }
+      50% {
+        top: 30%;
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 🌟 Efecto escáner -->
+  <div class="scanner"></div>
+
+  <section class="card vault-glow">
+    <h1 class="holo-glow">🔐 Bienvenido a TronHold Vault</h1>
+    <p class="terminal-display">
+      Tu portal de staking donde tus TRX descansan seguros... y crecen 💹
+    </p>
+
+    <form id="form-perfil">
+      <label for="wallet">🪪 Dirección TRON:</label><br />
+      <input class="terminal-display" type="text" id="wallet" required /><br />
+
+      <label for="pass">🔑 Contraseña:</label><br />
+      <input class="terminal-display" type="password" id="pass" required /><br /><br />
+
+      <button type="submit">🧬 Acceder a la bóveda</button>
+    </form>
+  </section>
 
   <script src="script.js"></script>
 </body>
