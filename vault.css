@@ -1,0 +1,94 @@
+/* Estilo base general */
+body {
+  background: radial-gradient(circle at center, #0f1114, #0a0c0f 90%);
+  color: #f2f2f2;
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Paneles tipo bóveda */
+.card {
+  background: linear-gradient(145deg, #1a1f24, #121619);
+  border: 2px solid #00ffc3;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 195, 0.3), inset 0 0 20px rgba(0, 255, 195, 0.1);
+  padding: 20px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+/* Pantallas tipo terminal holográfico */
+.terminal-display {
+  font-family: 'Share Tech Mono', monospace;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #00ff99;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #00ff99;
+  box-shadow: 0 0 10px #00ff99aa;
+}
+
+/* Títulos de sección */
+h1, h2 {
+  color: #00cfff;
+  text-shadow: 0 0 5px #00cfff88;
+}
+
+/* Botones luminosos */
+button {
+  background: transparent;
+  color: #ffa200;
+  border: 2px solid #ffa200;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button:hover {
+  background: #111;
+  box-shadow: 0 0 10px #ffa200aa, inset 0 0 5px #ffa20055;
+}
+
+/* Relojes tipo bóveda digital */
+#reloj, #reloj-desbloqueo, #reloj-global {
+  font-size: 1.3em;
+  margin-top: 10px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Copia y entradas */
+input, select {
+  background: #1f262d;
+  color: #00ffc3;
+  border: 1px solid #00ffc3;
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Efecto holográfico en cabeceras */
+.holo-glow {
+  color: #00eaff;
+  text-shadow:
+    0 0 5px #00eaff,
+    0 0 15px #00eaff99,
+    0 0 30px #00eaff55;
+  font-weight: 600;
+  font-size: 1.4em;
+}
+
+/* Borde animado de bóveda */
+@keyframes pulsar {
+  0% { box-shadow: 0 0 5px #00ffc3; }
+  50% { box-shadow: 0 0 15px #00ffc3aa; }
+  100% { box-shadow: 0 0 5px #00ffc3; }
+}
+.vault-glow {
+  animation: pulsar 2s infinite;
+  border: 2px solid #00ffc3;
+  padding: 15px;
+  border-radius: 10px;
+}
