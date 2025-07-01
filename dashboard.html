@@ -2,54 +2,85 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Mi Staking</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TronHold Vault – Dashboard</title>
+
+  <!-- Estilo retro-futurista -->
+  <link rel="stylesheet" href="vault.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    /* Animación tipo “Acceso Autorizado” */
+    #acceso-autorizado {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2em;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ff99aa, 0 0 20px #00ff99aa;
+      animation: aparecer 2s ease-out forwards;
+      z-index: 1000;
+    }
+
+    @keyframes aparecer {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -70%);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -30%);
+      }
+    }
+  </style>
 </head>
-  <!-- Enlace al archivo de estilo de bóveda -->
-<link rel="stylesheet" href="vault.css">
 
-<!-- Fuentes holográficas -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <body>
-  <h2>👤 Panel de Usuario</h2>
-  <div id="datos-usuario" class="card"></div>
+  <!-- Acceso autorizado holográfico -->
+  <div id="acceso-autorizado">🔓 ACCESO AUTORIZADO</div>
 
-  <section class="card">
-    <h3>📥 Tu dirección de depósito</h3>
-    <code id="direccion-deposito" style="font-size: 1.1em;"></code>
-    <br />
-    <button onclick="copiarDireccion()" style="margin-top: 0.5em;">📋 Copiar dirección</button>
+  <h1 class="holo-glow">🏦 TronHold Vault – Panel Principal</h1>
 
-    <hr />
-
-    <label for="monto-deposito">💸 Simular un depósito:</label>
-    <input type="number" id="monto-deposito" placeholder="Monto TRX" />
-    <button onclick="simularDeposito()">📥 Depositar</button>
-
-    <div id="depositos" style="margin-top:1em;">– Sin depósitos aún</div>
+  <section class="card vault-glow">
+    <h2 class="holo-glow">👤 Tu perfil</h2>
+    <p id="datos-usuario" class="terminal-display">Cargando datos...</p>
   </section>
 
   <section class="card">
-    <h3>📤 Retiros</h3>
-    <input type="number" id="monto-retiro" placeholder="Monto TRX" />
-    <button onclick="realizarRetiro()">Retirar</button>
-    <div id="retiros"></div>
+    <h3>📮 Dirección de depósito</h3>
+    <p id="direccion-deposito" class="terminal-display">Cargando...</p>
+    <button onclick="copiarDireccion()">📎 Copiar dirección</button>
   </section>
 
   <section class="card">
-    <h3>🕒 Reloj de Ganancias</h3>
-    <p id="reloj">0.000000 TRX</p>
+    <h3>📈 Ganancia acumulada</h3>
+    <p id="reloj" class="terminal-display">–.– TRX</p>
   </section>
+
   <section class="card">
-  <h3>🔓 Disponibilidad de retiro</h3>
-  <p id="reloj-desbloqueo">– Esperando depósitos</p>
- </section>
+    <h3>⏳ Tiempo restante para desbloqueo</h3>
+    <p id="reloj-desbloqueo" class="terminal-display">–</p>
+  </section>
 
- <section class="card">
-  <h3>🌐 Tiempo desde el inicio del proyecto</h3>
-  <p id="reloj-global">Cargando reloj...</p>
-</section>
+  <section class="card">
+    <h3>🌐 Tiempo activo desde inicio del proyecto</h3>
+    <p id="reloj-global" class="terminal-display">–</p>
+  </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <section class="card">
+    <h3>📥 Simular un depósito</h3>
+    <input id="monto-deposito" type="number" placeholder="Cantidad TRX" class="terminal-display" />
+    <button onclick="simularDeposito()">➕ Depositar</button>
+    <div id="depositos" class="terminal-display">– Sin depósitos aún</div>
+  </section>
+
+  <section class="card">
+    <h3>📤 Simular un retiro</h3>
+    <input id="monto-retiro" type="number" placeholder="Cantidad TRX" class="terminal-display" />
+    <button
