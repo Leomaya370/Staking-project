@@ -146,9 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         // Login exitoso
-        localStorage.setItem('usuarioActivo', wallet);
-        window.location.href = 'dashboard.html';
-        return;
+localStorage.setItem('usuarioActivo', wallet);
+
+// OPCIONAL: podrías guardar dirección en variable global si quieres visualizar inmediatamente
+// perfilActivo = usuarioExistente; ← no es obligatorio en este punto
+
+window.location.href = 'dashboard.html';
       }
 
       // Registro nuevo
