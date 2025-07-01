@@ -178,19 +178,18 @@ window.location.href = 'dashboard.html';
     const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
     const wallet = localStorage.getItem('usuarioActivo');
     const perfil = lista.find(u => u.wallet === wallet);
-    perfilActivo = perfil;
+perfilActivo = perfil;
 
-    if (!perfil) {
-      alert("⛔ No hay sesión activa.");
-      window.location.href = 'index.html';
-      return;
-    }
+  if (!perfil) {
+    alert("⛔ No hay sesión activa.");
+    window.location.href = 'index.html';
+    return;
+}
 
-    document.body.classList.add(`tema-${perfil.tema}`);
-
-    const datos = document.getElementById('datos-usuario');
-    if (datos) {
-      datos.innerHTML = `<strong>Wallet:</strong> ${perfil.wallet}<br><strong>Tema:</strong> ${perfil.tema}`;
+// Luego en el DOM:
+const direccion = document.getElementById('direccion-deposito');
+if (direccion) {
+  direccion.innerText = perfil.direccionDeposito;
     }
 
     const direccion = document.getElementById('direccion-deposito');
