@@ -79,8 +79,11 @@
     <button onclick="simularDeposito()">➕ Depositar</button>
     <div id="depositos" class="terminal-display">– Sin depósitos aún</div>
   </section>
-
+  
   <section class="card">
     <h3>📤 Simular un retiro</h3>
-    <input id="monto-retiro" type="number" placeholder="Cantidad TRX" class="terminal-display" />
-    <button
+    <input type="number" id="monto-retiro" placeholder="Cantidad TRX" class="terminal-display" />
+    <button onclick="realizarRetiro()">🚪 Retirar</button>
+    <div id="retiros" class="terminal-display">–</div>
+  </section>
+  
