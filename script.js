@@ -150,5 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
       if (lista.find(u => u.wallet === wallet)) {
-        alert("⚠️ Wallet ya registrada.");
+        alert("⚠️ Esta wallet ya está registrada. Por favor usa una diferente o inicia sesión.");
         return;
+}
