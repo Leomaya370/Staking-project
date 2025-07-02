@@ -1,4 +1,3 @@
-// 🔧 CONFIGURACIÓN GENERAL
 const apy = 0.30;
 const fechaInicioProyecto = new Date("2025-07-01T00:00:00Z");
 
@@ -6,7 +5,7 @@ let base = 0;
 let start = Date.now();
 let perfilActivo = null;
 
-// 🏗️ Dirección TRON virtual
+// Generador de dirección TRON virtual
 function generarDireccionVirtual() {
   const letras = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
   const numeros = '123456789';
@@ -19,7 +18,7 @@ function generarDireccionVirtual() {
   return direccion;
 }
 
-// 📦 Guardar cambios en perfil
+// Guardar cambios en el perfil
 function guardarPerfil(perfilActualizado) {
   const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
   const idx = lista.findIndex(u => u.wallet === perfilActualizado.wallet);
@@ -29,10 +28,10 @@ function guardarPerfil(perfilActualizado) {
   }
 }
 
-// ⏱ Ayudante para rellenar con ceros
+// Rellenar con ceros
 const pad = n => n.toString().padStart(2, '0');
 
-// 🌐 Reloj global
+// Reloj global
 function actualizarRelojGlobal() {
   const elem = document.getElementById('reloj-global');
   if (!elem) return;
@@ -44,7 +43,7 @@ function actualizarRelojGlobal() {
   elem.innerText = `${pad(dias)}d ${pad(horas)}h ${pad(minutos)}m ${pad(segundos)}s activos`;
 }
 
-// 📈 Ganancias APY
+// Ganancias APY
 function actualizarGanancia() {
   const reloj = document.getElementById('reloj');
   if (!reloj) return;
@@ -54,7 +53,7 @@ function actualizarGanancia() {
   reloj.innerText = `${total.toFixed(6)} TRX`;
 }
 
-// 🔒 Reloj desbloqueo 24h
+// Cuenta regresiva para retiro
 function actualizarRelojDesbloqueo() {
   const elem = document.getElementById('reloj-desbloqueo');
   if (!elem || !perfilActivo) return;
@@ -74,7 +73,7 @@ function actualizarRelojDesbloqueo() {
   elem.innerText = `⏳ Faltan ${pad(h)}h ${pad(m)}m ${pad(s)}s para desbloqueo`;
 }
 
-// 📋 Copiar dirección
+// Copiar dirección
 function copiarDireccion() {
   const txt = document.getElementById('direccion-deposito')?.innerText;
   if (txt) {
@@ -84,7 +83,7 @@ function copiarDireccion() {
   }
 }
 
-// ➕ Simular depósito
+// Simular depósito
 function simularDeposito() {
   const input = document.getElementById('monto-deposito');
   const div = document.getElementById('depositos');
@@ -105,7 +104,7 @@ function simularDeposito() {
   }
 }
 
-// ➖ Simular retiro
+// Simular retiro
 function realizarRetiro() {
   const monto = parseFloat(document.getElementById('monto-retiro').value);
   const ahora = Date.now();
@@ -121,15 +120,19 @@ function realizarRetiro() {
   }
 }
 
-// 🧩 Inicialización DOM
+// Inicialización global
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form-perfil');
 
-  // 🌐 Registro o Login
+  // ⛓️ Capturar referidor desde la URL
+  const url = new URL(window.location.href);
+  const ref = url.searchParams.get('ref');
+  if (ref) localStorage.setItem('referidor', ref);
+
+  // Página de ingreso
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const wallet = document.getElementById('wallet').value.trim();
       const pass = document.getElementById('pass').value.trim();
       if (!wallet || !pass) {
@@ -139,32 +142,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
       const usuarioExistente = lista.find(u => u.wallet === wallet);
+
       if (usuarioExistente) {
-  if (usuarioExistente.pass !== pass) {
-    alert("❌ Contraseña incorrecta.");
-    return;
-  }
-  // Login exitoso
-  localStorage.setItem('usuarioActivo', wallet);
-  window.location.href = 'dashboard.html';
-  return; // ✅ Esto detiene antes del registro nuevo
+        if (usuarioExistente.pass !== pass) {
+          alert("❌ Contraseña incorrecta.");
+          return;
+        }
+        localStorage.setItem('usuarioActivo', wallet);
+        window.location.href = 'dashboard.html';
+        return;
       }
 
-
-
-// OPCIONAL: podrías guardar dirección en variable global si quieres visualizar inmediatamente
-// perfilActivo = usuarioExistente; ← no es obligatorio en este punto
-
-window.location.href = 'dashboard.html';
-      }
-
-      // Registro nuevo
+      const referidor = localStorage.getItem('referidor');
+      const referidorValido = lista.find(u => u.wallet === referidor);
       const nuevo = {
         wallet,
         pass,
         tema: 'claro',
         direccionDeposito: generarDireccionVirtual(),
-        bloqueo: null
+        bloqueo: null,
+        referido1: referidorValido ? referidorValido.wallet : null
       };
 
       lista.push(nuevo);
@@ -176,28 +173,38 @@ window.location.href = 'dashboard.html';
     return;
   }
 
-  // 🧭 Dashboard
+  // Dashboard
   const ruta = window.location.pathname;
   if (ruta.includes('dashboard')) {
     const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
     const wallet = localStorage.getItem('usuarioActivo');
     const perfil = lista.find(u => u.wallet === wallet);
-perfilActivo = perfil;
+    perfilActivo = perfil;
 
-  if (!perfil) {
-    alert("⛔ No hay sesión activa.");
-    window.location.href = 'index.html';
-    return;
-}
+    if (!perfil) {
+      alert("⛔ No hay sesión activa.");
+      window.location.href = 'index.html';
+      return;
+    }
 
-// Luego en el DOM:
+    document.body.classList.add(`tema-${perfil.tema}`);
+
+    const datos = document.getElementById('datos-usuario');
+    if (datos) {
+      datos.innerHTML = `<strong>Wallet:</strong> ${perfil.wallet}<br>
+                         <strong>Referido de:</strong> ${perfil.referido1 || '—'}`;
+    }
 
     const direccion = document.getElementById('direccion-deposito');
     if (direccion) {
       direccion.innerText = perfil.direccionDeposito;
     }
 
-    // ⏱ Relojes en vivo
+    const enlace = document.getElementById('enlace-invitacion');
+    if (enlace) {
+      enlace.innerText = `${window.location.origin}/index.html?ref=${perfil.wallet}`;
+    }
+
     setInterval(() => {
       actualizarGanancia();
       actualizarRelojDesbloqueo();
