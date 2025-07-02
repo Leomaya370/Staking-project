@@ -139,14 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const lista = JSON.parse(localStorage.getItem('usuarios')) || [];
       const usuarioExistente = lista.find(u => u.wallet === wallet);
+      if (usuarioExistente.pass !== pass) {
+        alert("❌ Contraseña incorrecta.");
+        return;
+      }
+      // Login exitoso
+      localStorage.setItem('usuarioActivo', wallet);
+      window.location.href = 'dashboard.html';
+      return; // ✅ ESTO detiene que llegue al "registro nuevo  
+      }
 
-      if (usuarioExistente) {
-        if (usuarioExistente.pass !== pass) {
-          alert("❌ Contraseña incorrecta.");
-          return;
-        }
-        // Login exitoso
-localStorage.setItem('usuarioActivo', wallet);
 
 // OPCIONAL: podrías guardar dirección en variable global si quieres visualizar inmediatamente
 // perfilActivo = usuarioExistente; ← no es obligatorio en este punto
